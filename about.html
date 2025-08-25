@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Starburst Fireworks</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #0d0b20;
+        --secondary: #1e183d;
+        --accent1: #ff2a6d;
+        --accent2: #05d9e8;
+        --accent3: #ffb800;
+        --accent4: #00ff87;
+        --text-light: #f1f2f6;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--primary);
+        color: var(--text-light);
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+      }
+
+      /* Navigation */
+      .navbar {
+        background: rgba(13, 11, 32, 0.9) !important;
+        backdrop-filter: blur(10px);
+        padding: 15px 0;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.8rem;
+        background: linear-gradient(
+          45deg,
+          var(--accent1),
+          var(--accent3),
+          var(--accent2)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .nav-link {
+        color: var(--text-light) !important;
+        font-weight: 600;
+        margin: 0 8px;
+        transition: all 0.3s;
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent1), var(--accent3));
+        transition: width 0.3s;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-link:hover {
+        color: var(--accent2) !important;
+      }
+
+      /* Buttons */
+      .btn-primary {
+        background: linear-gradient(45deg, var(--accent1), var(--accent3));
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 12px 30px;
+        border-radius: 30px;
+        transition: all 0.3s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(255, 42, 109, 0.3);
+      }
+
+      .btn-outline-primary {
+        border: 2px solid var(--accent1);
+        color: var(--accent1);
+        font-weight: 600;
+        padding: 10px 25px;
+        border-radius: 30px;
+        transition: all 0.3s;
+      }
+
+      .btn-outline-primary:hover {
+        background: var(--accent1);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(255, 42, 109, 0.3);
+      }
+
+      /* Hero Section */
+      .about-hero {
+        background: linear-gradient(
+            rgba(13, 11, 32, 0.8),
+            rgba(13, 11, 32, 0.9)
+          ),
+          url("https://images.unsplash.com/photo-1519794206460-2cd196c4e25b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80");
+        background-size: cover;
+        background-position: center;
+        padding: 150px 0 100px;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+          45deg,
+          var(--accent1),
+          var(--accent3),
+          var(--accent2),
+          var(--accent4)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2.5rem;
+        color: var(--text-light);
+      }
+
+      /* Section Titles */
+      .section-title {
+        position: relative;
+        margin-bottom: 50px;
+        padding-bottom: 15px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 5px;
+        background: linear-gradient(90deg, var(--accent1), var(--accent3));
+        border-radius: 10px;
+      }
+
+      .section-title.text-center::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding: 50px 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--accent1), var(--accent3));
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 50px;
+      }
+
+      .timeline-content {
+        position: relative;
+        width: 45%;
+        padding: 20px;
+        background: var(--secondary);
+        border-radius: 10px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content {
+        margin-left: auto;
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        background: var(--accent1);
+        border-radius: 50%;
+      }
+
+      .timeline-item:nth-child(odd)::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .timeline-item:nth-child(even)::after {
+        right: 50%;
+        transform: translateX(50%);
+      }
+
+      /* Team Cards */
+      .team-card {
+        background: var(--secondary);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(255, 42, 109, 0.2);
+      }
+
+      .team-img {
+        height: 300px;
+        overflow: hidden;
+      }
+
+      .team-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .team-card:hover .team-img img {
+        transform: scale(1.1);
+      }
+
+      .team-info {
+        padding: 25px;
+      }
+
+      .team-name {
+        color: var(--accent2);
+        margin-bottom: 5px;
+      }
+
+      .team-role {
+        color: var(--accent3);
+        margin-bottom: 15px;
+      }
+
+      /* Values */
+      .value-card {
+        background: var(--secondary);
+        padding: 30px;
+        border-radius: 15px;
+        height: 100%;
+        transition: all 0.3s;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(255, 42, 109, 0.2);
+      }
+
+      .value-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, var(--accent1), var(--accent3));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Stats */
+      .stats-section {
+        background: linear-gradient(to right, var(--secondary), var(--primary));
+        padding: 80px 0;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 30px;
+      }
+
+      .stat-number {
+        font-size: 3.5rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, var(--accent1), var(--accent3));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+      }
+
+      .stat-text {
+        font-size: 1.2rem;
+        color: var(--text-light);
+      }
+
+      /* Footer */
+      .footer {
+        background: linear-gradient(to bottom, var(--secondary), #0a081a);
+        padding: 70px 0 30px;
+      }
+
+      .footer-title {
+        color: var(--accent2);
+        margin-bottom: 25px;
+        font-size: 1.5rem;
+      }
+
+      .footer-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 12px;
+        transition: all 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent1);
+        transform: translateX(5px);
+      }
+
+      .social-icons a {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(45deg, var(--accent1), var(--accent3));
+        border-radius: 50%;
+        text-align: center;
+        line-height: 45px;
+        color: white;
+        margin-right: 12px;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .social-icons a:hover {
+        transform: translateY(-5px) rotate(10deg);
+        box-shadow: 0 5px 15px rgba(255, 42, 109, 0.4);
+      }
+
+      .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 25px;
+        margin-top: 50px;
+      }
+
+      /* Animations */
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .floating {
+        animation: float 5s ease-in-out infinite;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 992px) {
+        .hero-title {
+          font-size: 3rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .timeline::before {
+          left: 30px;
+        }
+
+        .timeline-content {
+          width: calc(100% - 80px);
+          margin-left: 80px !important;
+        }
+
+        .timeline-item::after {
+          left: 30px !important;
+          transform: translateX(-50%) !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .about-hero {
+          padding: 130px 0 80px;
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"> STARBURST </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h1 class="hero-title">Our Story</h1>
+            <p class="hero-subtitle">
+              From a small family business to a nationwide fireworks distributor
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Intro -->
+    <section class="py-5">
+      <div class="container py-5">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="section-title">Who We Are</h2>
+            <p class="lead">
+              Starburst Fireworks is a premier wholesale distributor of
+              high-quality fireworks, serving retailers across the United States
+              since 2005.
+            </p>
+            <p>
+              Our journey began with a simple passion for creating memorable
+              experiences through the art of pyrotechnics. What started as a
+              small family operation has grown into one of the nation's leading
+              fireworks distributors, without ever losing our commitment to
+              quality, safety, and customer satisfaction.
+            </p>
+            <p>
+              Today, we work with manufacturers around the world to bring the
+              most spectacular and innovative fireworks to professional
+              retailers, event organizers, and fireworks enthusiasts.
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <img
+              src="https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/009.png"
+              alt="Our Warehouse"
+              class="img-fluid rounded shadow floating"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-6">
+            <div class="stat-item">
+              <div class="stat-number" data-count="18">0</div>
+              <div class="stat-text">Years Experience</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item">
+              <div class="stat-number" data-count="500">0</div>
+              <div class="stat-text">Products</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item">
+              <div class="stat-number" data-count="42">0</div>
+              <div class="stat-text">States Served</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item">
+              <div class="stat-number" data-count="10000">0</div>
+              <div class="stat-text">Happy Clients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section
+      class="py-5"
+      style="
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+      "
+    >
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <h3>Our Mission</h3>
+              <p>
+                To provide the highest quality fireworks through exceptional
+                service, competitive pricing, and unwavering commitment to
+                safety. We aim to light up celebrations across the nation while
+                building lasting relationships with our clients.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-eye"></i>
+              </div>
+              <h3>Our Vision</h3>
+              <p>
+                To be the nation's most trusted fireworks wholesaler, known for
+                innovation, reliability, and spectacular products. We envision a
+                future where every celebration is enhanced by the magic of
+                Starburst Fireworks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-5">
+      <div class="container py-5">
+        <h2 class="section-title text-center">Our Values</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3>Safety First</h3>
+              <p>
+                We prioritize safety in every aspect of our operations, from
+                manufacturing to distribution.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <h3>Quality Excellence</h3>
+              <p>
+                We never compromise on quality, ensuring every product meets our
+                rigorous standards.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>Customer Focus</h3>
+              <p>
+                Our clients are at the heart of everything we do. Their success
+                is our success.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+              <h3>Innovation</h3>
+              <p>
+                We continuously explore new pyrotechnic technologies and display
+                techniques.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <h3>Integrity</h3>
+              <p>
+                We conduct business with honesty, transparency, and ethical
+                practices.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-fire"></i>
+              </div>
+              <h3>Passion</h3>
+              <p>
+                We're driven by our love for pyrotechnics and the joy it brings
+                to people.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <h3 class="footer-title">Starburst</h3>
+            <p>
+              Your trusted wholesale partner for premium fireworks and
+              professional pyrotechnics.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 mb-4 mb-md-0">
+            <h5 class="footer-title">Quick Links</h5>
+            <div class="footer-links">
+              <a href="index.html">Home</a>
+              <a href="about.html">About Us</a>
+              <a href="contact.html">Contact</a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <h5 class="footer-title">Contact Info</h5>
+            <div class="footer-links">
+              <p>
+                <i class="fas fa-map-marker-alt me-2"></i> 1234 Sparkler Avenue,
+                Las Vegas, NV 89101
+              </p>
+              <p><i class="fas fa-phone me-2"></i> (702) 555-0123</p>
+              <p>
+                <i class="fas fa-envelope me-2"></i>
+                sales@starburst.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center copyright">
+          <p>&copy; 2025 Starburst Enterprise. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+      $(document).ready(function () {
+        // Add smooth scrolling to all links
+        $("a").on("click", function (event) {
+          if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            $("html, body").animate(
+              {
+                scrollTop: $(hash).offset().top,
+              },
+              800,
+              function () {
+                window.location.hash = hash;
+              }
+            );
+          }
+        });
+
+        // Animate stats counter
+        function animateCounter() {
+          $(".stat-number").each(function () {
+            var $this = $(this);
+            var countTo = $this.attr("data-count");
+
+            $({ countNum: $this.text() }).animate(
+              {
+                countNum: countTo,
+              },
+              {
+                duration: 2000,
+                easing: "swing",
+                step: function () {
+                  $this.text(Math.floor(this.countNum));
+                },
+                complete: function () {
+                  $this.text(this.countNum);
+                },
+              }
+            );
+          });
+        }
+
+        // Check if element is in viewport
+        function isInViewport(element) {
+          var rect = element.getBoundingClientRect();
+          return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <=
+              (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <=
+              (window.innerWidth || document.documentElement.clientWidth)
+          );
+        }
+
+        // Animate stats when in viewport
+        let statsAnimated = false;
+
+        $(window).scroll(function () {
+          if (
+            !statsAnimated &&
+            isInViewport(document.querySelector(".stats-section"))
+          ) {
+            animateCounter();
+            statsAnimated = true;
+          }
+        });
+
+        // Trigger animation on page load if stats are already in view
+        if (isInViewport(document.querySelector(".stats-section"))) {
+          animateCounter();
+          statsAnimated = true;
+        }
+      });
+    </script>
+  </body>
+</html>

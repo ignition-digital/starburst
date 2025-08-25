@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Starburst - Premium Fireworks</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #0d0b20;
+        --secondary: #1e183d;
+        --accent1: #ff2a6d;
+        --accent2: #05d9e8;
+        --accent3: #ffb800;
+        --accent4: #00ff87;
+        --text-light: #f1f2f6;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--primary);
+        color: var(--text-light);
+        overflow-x: hidden;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+      }
+
+      /* Animated Background */
+      .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.3;
+      }
+
+      /* Navigation */
+      .navbar {
+        background: rgba(13, 11, 32, 0.9) !important;
+        backdrop-filter: blur(10px);
+        padding: 15px 0;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.8rem;
+        background: linear-gradient(
+          45deg,
+          var(--accent1),
+          var(--accent3),
+          var(--accent2)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .nav-link {
+        color: var(--text-light) !important;
+        font-weight: 600;
+        margin: 0 8px;
+        transition: all 0.3s;
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent1), var(--accent3));
+        transition: width 0.3s;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-link:hover {
+        color: var(--accent2) !important;
+      }
+
+      /* Buttons */
+      .btn-primary {
+        background: linear-gradient(45deg, var(--accent1), var(--accent3));
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 12px 30px;
+        border-radius: 30px;
+        transition: all 0.3s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(255, 42, 109, 0.3);
+      }
+
+      .btn-outline-primary {
+        border: 2px solid var(--accent1);
+        color: var(--accent1);
+        font-weight: 600;
+        padding: 10px 25px;
+        border-radius: 30px;
+        transition: all 0.3s;
+      }
+
+      .btn-outline-primary:hover {
+        background: var(--accent1);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(255, 42, 109, 0.3);
+      }
+
+      /* Hero Section with Slider */
+      .hero-slider {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .hero-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.5s ease;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-slide.active {
+        opacity: 1;
+      }
+
+      .hero-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          rgba(13, 11, 32, 0.7),
+          rgba(13, 11, 32, 0.9)
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+          45deg,
+          var(--accent1),
+          var(--accent3),
+          var(--accent2),
+          var(--accent4)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2.5rem;
+        color: var(--text-light);
+      }
+
+      .slider-controls {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        display: flex;
+        gap: 10px;
+      }
+
+      .slider-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .slider-dot.active {
+        background: var(--accent1);
+        transform: scale(1.3);
+      }
+
+      .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.2);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .slider-arrow:hover {
+        background: var(--accent1);
+      }
+
+      .slider-arrow.prev {
+        left: 30px;
+      }
+
+      .slider-arrow.next {
+        right: 30px;
+      }
+
+      /* Section Titles */
+      .section-title {
+        position: relative;
+        margin-bottom: 50px;
+        padding-bottom: 15px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 5px;
+        background: linear-gradient(90deg, var(--accent1), var(--accent3));
+        border-radius: 10px;
+      }
+
+      .section-title.text-center::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      /* Cards */
+      .card {
+        background-color: var(--secondary);
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(255, 42, 109, 0.2);
+      }
+
+      .card-title {
+        color: var(--accent2);
+        font-weight: 700;
+      }
+
+      /* Category Cards */
+      .category-card {
+        position: relative;
+        overflow: hidden;
+        height: 280px;
+        margin-bottom: 25px;
+        border-radius: 15px;
+      }
+
+      .category-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .category-card:hover img {
+        transform: scale(1.1);
+      }
+
+      .category-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        padding: 25px;
+        color: white;
+      }
+
+      /* Testimonials */
+      .testimonial-card {
+        padding: 30px;
+        height: 100%;
+        border-radius: 15px;
+      }
+
+      .testimonial-text {
+        position: relative;
+        padding: 25px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 42, 109, 0.15),
+          rgba(5, 217, 232, 0.15)
+        );
+        border-radius: 15px;
+        margin-bottom: 25px;
+      }
+
+      .testimonial-text::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 30px;
+        border-width: 15px 15px 0;
+        border-style: solid;
+        border-color: rgba(255, 42, 109, 0.15) transparent transparent;
+      }
+
+      /* Certifications */
+      .certification-badge {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, var(--accent1), var(--accent3));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Footer */
+      .footer {
+        background: linear-gradient(to bottom, var(--secondary), #0a081a);
+        padding: 70px 0 30px;
+      }
+
+      .footer-title {
+        color: var(--accent2);
+        margin-bottom: 25px;
+        font-size: 1.5rem;
+      }
+
+      .footer-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        display: block;
+        margin-bottom: 12px;
+        transition: all 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent1);
+        transform: translateX(5px);
+      }
+
+      .social-icons a {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(45deg, var(--accent1), var(--accent3));
+        border-radius: 50%;
+        text-align: center;
+        line-height: 45px;
+        color: white;
+        margin-right: 12px;
+        transition: all 0.3s;
+      }
+
+      .social-icons a:hover {
+        transform: translateY(-5px) rotate(10deg);
+        box-shadow: 0 5px 15px rgba(255, 42, 109, 0.4);
+      }
+
+      .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 25px;
+        margin-top: 50px;
+      }
+
+      /* Fireworks Animation */
+      #fireworks-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Animations */
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .floating {
+        animation: float 5s ease-in-out infinite;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 992px) {
+        .hero-title {
+          font-size: 3rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .slider-arrow {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-slider {
+          height: 80vh;
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .slider-arrow {
+          width: 35px;
+          height: 35px;
+          font-size: 1rem;
+        }
+
+        .slider-arrow.prev {
+          left: 15px;
+        }
+
+        .slider-arrow.next {
+          right: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"> STARBURST </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section with Slider -->
+    <section class="hero-slider">
+      <!-- Slide 1 -->
+      <div
+        class="hero-slide active"
+        style="
+          background-image: url('https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/015.png');
+        "
+      >
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Ignite Your Business with Premium Fireworks
+          </h1>
+          <p class="hero-subtitle">
+            Wholesale fireworks that light up the sky and your profit margins
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="contact.html" class="btn btn-outline-primary btn-lg"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div
+        class="hero-slide"
+        style="
+          background-image: url('https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/023.png');
+        "
+      >
+        <div class="hero-content">
+          <h1 class="hero-title">Spectacular Displays for Every Event</h1>
+          <p class="hero-subtitle">
+            From backyard parties to professional shows
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="contact.html" class="btn btn-outline-primary btn-lg"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div
+        class="hero-slide"
+        style="
+          background-image: url('https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/033.png');
+        "
+      >
+        <div class="hero-content">
+          <h1 class="hero-title">Professional Grade Pyrotechnics</h1>
+          <p class="hero-subtitle">Trusted by event organizers nationwide</p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="contact.html" class="btn btn-outline-primary btn-lg"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div
+        class="hero-slide"
+        style="
+          background-image: url('https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/035.png');
+        "
+      >
+        <div class="hero-content">
+          <h1 class="hero-title">Seasonal Specials & Packages</h1>
+          <p class="hero-subtitle">
+            Perfect for holidays and special celebrations
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="contact.html" class="btn btn-outline-primary btn-lg"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div
+        class="hero-slide"
+        style="
+          background-image: url('https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/021.png');
+        "
+      >
+        <div class="hero-content">
+          <h1 class="hero-title">Nationwide Distribution</h1>
+          <p class="hero-subtitle">Fast, reliable shipping to your location</p>
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="contact.html" class="btn btn-outline-primary btn-lg"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider Controls -->
+      <div class="slider-arrow prev">
+        <i class="fas fa-chevron-left"></i>
+      </div>
+      <div class="slider-arrow next">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+
+      <div class="slider-controls">
+        <div class="slider-dot active" data-slide="0"></div>
+        <div class="slider-dot" data-slide="1"></div>
+        <div class="slider-dot" data-slide="2"></div>
+        <div class="slider-dot" data-slide="3"></div>
+        <div class="slider-dot" data-slide="4"></div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-5" style="background: var(--primary)">
+      <div class="container py-5">
+        <div class="row mb-5">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-title text-center">
+              Our Explosive Product Range
+            </h2>
+            <p class="lead">
+              Discover our extensive collection of professional-grade fireworks
+              for all your retail needs
+            </p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="category-card rounded">
+              <img
+                src="https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/001.png"
+                alt="Aerial Fireworks"
+              />
+              <div class="category-overlay">
+                <h3>Aerial Fireworks</h3>
+                <p>Multi-shot arrays, cakes, and repeaters</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="category-card rounded">
+              <img
+                src="https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/002.png"
+                alt="Fountains"
+              />
+              <div class="category-overlay">
+                <h3>Fountains & Ground Effects</h3>
+                <p>Colorful ground displays and sparklers</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="category-card rounded">
+              <img
+                src="https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/003.png"
+                alt="Novelty Fireworks"
+              />
+              <div class="category-overlay">
+                <h3>Novelty Items</h3>
+                <p>Fun products for all ages</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="category-card rounded">
+              <img
+                src="https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/004.png"
+                alt="Roman Candles"
+              />
+              <div class="category-overlay">
+                <h3>Roman Candles & Rockets</h3>
+                <p>Classic favorites with modern effects</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="category-card rounded">
+              <img
+                src="https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/005.png"
+                alt="Seasonal Packages"
+              />
+              <div class="category-overlay">
+                <h3>Seasonal Packages</h3>
+                <p>Curated assortments for holidays</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="category-card rounded">
+              <img
+                src="https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/006.png"
+                alt="Professional Displays"
+              />
+              <div class="category-overlay">
+                <h3>Professional Displays</h3>
+                <p>Large-scale event fireworks</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section
+      id="about"
+      class="py-5"
+      style="
+        background: linear-gradient(to right, var(--secondary), var(--primary));
+      "
+    >
+      <div class="container py-5">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="section-title">About Starburst Fireworks</h2>
+            <p class="lead">
+              Your trusted partner in the fireworks industry since 2005.
+            </p>
+            <p>
+              Starburst Fireworks began with a simple mission: to provide the
+              highest quality fireworks to retailers across the country. Today,
+              we're one of the nation's leading wholesale suppliers of premium
+              fireworks.
+            </p>
+            <p>
+              Our state-of-the-art facilities and rigorous quality control
+              processes ensure that every product we distribute meets the
+              highest safety and performance standards.
+            </p>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <i class="fas fa-check-circle text-success me-2"></i> Over 18
+                years of industry experience
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-check-circle text-success me-2"></i> Nationwide
+                distribution network
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-check-circle text-success me-2"></i> Strict
+                quality control standards
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                Competitive wholesale pricing
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <img
+              src="https://product-110924.s3.ap-southeast-1.amazonaws.com/gallery/011.png"
+              alt="Our Warehouse"
+              class="img-fluid rounded shadow floating"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section
+      id="certifications"
+      class="py-5"
+      style="background: var(--primary)"
+    >
+      <div class="container py-5">
+        <div class="row mb-5">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-title text-center">
+              Our Certifications & Standards
+            </h2>
+            <p class="lead">
+              We maintain the highest industry standards to ensure safety and
+              quality.
+            </p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4 text-center">
+            <div class="certification-badge">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h4>Safety Certified</h4>
+            <p>
+              All our products meet or exceed CPSC safety standards and
+              regulations.
+            </p>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="certification-badge">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <h4>Quality Assured</h4>
+            <p>
+              ISO 9001 certified manufacturing processes for consistent quality.
+            </p>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="certification-badge">
+              <i class="fas fa-truck"></i>
+            </div>
+            <h4>Licensed Distributor</h4>
+            <p>Fully licensed and insured for nationwide distribution.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <h3 class="footer-title">Starburst</h3>
+            <p>
+              Your trusted wholesale partner for premium fireworks and
+              professional pyrotechnics.
+            </p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 mb-4 mb-md-0">
+            <h5 class="footer-title">Quick Links</h5>
+            <div class="footer-links">
+              <a href="index.html">Home</a>
+              <a href="about.html">About Us</a>
+              <a href="contact.html">Contact</a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <h5 class="footer-title">Contact Info</h5>
+            <div class="footer-links">
+              <p>
+                <i class="fas fa-map-marker-alt me-2"></i> 1234 Sparkler Avenue,
+                Las Vegas, NV 89101
+              </p>
+              <p><i class="fas fa-phone me-2"></i> (702) 555-0123</p>
+              <p>
+                <i class="fas fa-envelope me-2"></i>
+                sales@starburst.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center copyright">
+          <p>&copy; 2025 Starburst Enterprise. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+      $(document).ready(function () {
+        // Add smooth scrolling to all links
+        $("a").on("click", function (event) {
+          if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            $("html, body").animate(
+              {
+                scrollTop: $(hash).offset().top,
+              },
+              800,
+              function () {
+                window.location.hash = hash;
+              }
+            );
+          }
+        });
+
+        // Hero Slider Functionality
+        let currentSlide = 0;
+        const slides = $(".hero-slide");
+        const dots = $(".slider-dot");
+        const totalSlides = slides.length;
+
+        // Function to show a specific slide
+        function showSlide(index) {
+          // Hide all slides
+          slides.removeClass("active");
+          dots.removeClass("active");
+
+          // Show the selected slide
+          slides.eq(index).addClass("active");
+          dots.eq(index).addClass("active");
+
+          currentSlide = index;
+        }
+
+        // Next slide function
+        function nextSlide() {
+          let next = currentSlide + 1;
+          if (next >= totalSlides) next = 0;
+          showSlide(next);
+        }
+
+        // Auto advance slides
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        // Click handlers for dots
+        dots.on("click", function () {
+          clearInterval(slideInterval);
+          let slideIndex = $(this).data("slide");
+          showSlide(slideIndex);
+          slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        // Click handlers for arrows
+        $(".slider-arrow.next").on("click", function () {
+          clearInterval(slideInterval);
+          nextSlide();
+          slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        $(".slider-arrow.prev").on("click", function () {
+          clearInterval(slideInterval);
+          let prev = currentSlide - 1;
+          if (prev < 0) prev = totalSlides - 1;
+          showSlide(prev);
+          slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        // Fireworks animation
+        const canvas = document.getElementById("fireworks-canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let fireworks = [];
+        let particles = [];
+
+        // Firework class
+        class Firework {
+          constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height;
+            this.targetY = Math.random() * canvas.height * 0.6;
+            this.speed = 2 + Math.random() * 2;
+            this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+            this.radius = 3;
+            this.reachedTarget = false;
+          }
+
+          update() {
+            if (!this.reachedTarget) {
+              this.y -= this.speed;
+              if (this.y <= this.targetY) {
+                this.reachedTarget = true;
+                this.explode();
+              }
+            }
+          }
+
+          explode() {
+            const particleCount = 80 + Math.floor(Math.random() * 50);
+            for (let i = 0; i < particleCount; i++) {
+              particles.push(new Particle(this.x, this.y, this.color));
+            }
+          }
+
+          draw() {
+            if (!this.reachedTarget) {
+              ctx.beginPath();
+              ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+              ctx.fillStyle = this.color;
+              ctx.fill();
+
+              // Draw tail
+              ctx.beginPath();
+              ctx.moveTo(this.x, this.y);
+              ctx.lineTo(this.x, this.y + 15);
+              ctx.strokeStyle = this.color;
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Particle class
+        class Particle {
+          constructor(x, y, color) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.angle = Math.random() * Math.PI * 2;
+            this.speed = 1 + Math.random() * 3;
+            this.friction = 0.95;
+            this.gravity = 0.2;
+            this.alpha = 1;
+            this.decay = Math.random() * 0.02 + 0.01;
+            this.radius = 1 + Math.random() * 2;
+          }
+
+          update() {
+            this.speed *= this.friction;
+            this.x += Math.cos(this.angle) * this.speed;
+            this.y += Math.sin(this.angle) * this.speed + this.gravity;
+            this.alpha -= this.decay;
+          }
+
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `${this.color
+              .replace(")", `, ${this.alpha})`)
+              .replace("hsl", "hsla")}`;
+            ctx.fill();
+          }
+        }
+
+        // Animation loop
+        function animate() {
+          requestAnimationFrame(animate);
+          ctx.fillStyle = "rgba(13, 11, 32, 0.1)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Randomly create new fireworks
+          if (Math.random() < 0.5) {
+            fireworks.push(new Firework());
+          }
+
+          // Update and draw fireworks
+          for (let i = fireworks.length - 1; i >= 0; i--) {
+            fireworks[i].update();
+            fireworks[i].draw();
+
+            if (fireworks[i].reachedTarget) {
+              fireworks.splice(i, 1);
+            }
+          }
+
+          // Update and draw particles
+          for (let i = particles.length - 1; i >= 0; i--) {
+            particles[i].update();
+            particles[i].draw();
+
+            if (particles[i].alpha <= 0) {
+              particles.splice(i, 1);
+            }
+          }
+        }
+
+        // Handle window resize
+        window.addEventListener("resize", function () {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+
+        // Start animation
+        animate();
+      });
+    </script>
+  </body>
+</html>
